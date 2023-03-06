@@ -24,3 +24,8 @@ Route::get('/news',[NewController::class, 'index'])->name('index');
 
 Route::get('/news/create',[NewController::class, 'create']);
 Route::post('/news',[NewController::class, 'store']);
+
+Route::put('/news/{id}', [NewController::class, 'update']);
+Route::get('/news/{id}/edit', [NewController::class, 'edit']);
+
+Route::delete('/news/{id}', [NewController::class, 'destroy']);
