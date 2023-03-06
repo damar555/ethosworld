@@ -52,7 +52,8 @@ class NewController extends Controller
      */
     public function edit(string $id)
     {
-        //
+        $data = News::find($id);
+        return view('news/edit', compact('data'));
     }
 
     /**
@@ -60,7 +61,10 @@ class NewController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        //
+        $data = News::find($id);
+        $data->update($request->all());
+
+        return redirect()->route('news')->with('success', "Data has been modified");
     }
 
     /**
@@ -68,6 +72,8 @@ class NewController extends Controller
      */
     public function destroy(string $id)
     {
-        //
+        $data = News::find($id);
+        $data->delete();
+        return redirect()->route('news')->with('success', "Data has been deleted");
     }
 }
