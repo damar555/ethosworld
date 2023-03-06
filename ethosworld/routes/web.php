@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\NewController;
 
 /*
 |--------------------------------------------------------------------------
@@ -14,5 +15,12 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    return view('home');
 });
+
+// Route::resource('news', NewController::class);
+
+Route::get('/news',[NewController::class, 'index'])->name('index');
+
+Route::get('/news/create',[NewController::class, 'create']);
+Route::post('/news',[NewController::class, 'store']);
