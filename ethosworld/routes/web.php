@@ -15,7 +15,7 @@ use App\Http\Controllers\NewController;
 */
 
 Route::get('/', function () {
-    return view('home');
+    return view('welcome');
 });
 
 // Route::resource('news', NewController::class);

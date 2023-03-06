@@ -1,6 +1,6 @@
-@extends('main')
+@extends('layout.template')
 
-@section('container')
+@section('content')
 <div class="container">
     <a href="/news/create" class="btn btn-success">Add News</a>
     <div class="row">
@@ -38,4 +38,5 @@
           </table>
     </div>
 </div>
+@endsection
     

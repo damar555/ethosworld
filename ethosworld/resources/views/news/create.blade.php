@@ -1,6 +1,6 @@
-@extends('main')
+@extends('layout.template')
 
-@section('container')
+@section('content')
 <h1 class="text-center mb-4">Tambah Data News</h1>
 <div class="container">
     <div class="row justify-content-center">
@@ -35,3 +35,4 @@
         </div>
     </div>
 </div>
+@endsection
