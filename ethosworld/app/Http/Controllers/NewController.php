@@ -36,7 +36,7 @@ class NewController extends Controller
         //     $data->foto = $request->file('image')->getClientOriginalName();
         //     $data->save();
         // }
-        return redirect()->route('index')->with('Succes', 'Data Berhasil Ditambahkan');
+        return redirect()->route('news')->with('Succes', 'Data Berhasil Ditambahkan');
     }
 
     /**

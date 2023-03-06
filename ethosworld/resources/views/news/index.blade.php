@@ -2,7 +2,7 @@
 
 @section('container')
 <div class="container">
-    <button type="button" class="btn btn-success">Add News</button>
+    <a href="/news/create" class="btn btn-success">Add News</a>
     <div class="row">
         <table class="table">
             <thead>
@@ -38,5 +38,4 @@
           </table>
     </div>
 </div>
-
     

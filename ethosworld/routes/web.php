@@ -20,7 +20,7 @@ Route::get('/', function () {
 
 // Route::resource('news', NewController::class);
 
-Route::get('/news',[NewController::class, 'index'])->name('index');
+Route::get('/news',[NewController::class, 'index'])->name('news');
 
 Route::get('/news/create',[NewController::class, 'create']);
 Route::post('/news',[NewController::class, 'store']);
