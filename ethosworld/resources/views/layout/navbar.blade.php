@@ -6,11 +6,19 @@
         <a class="nav-link" data-widget="pushmenu" href="#" role="button"><i class="fas fa-bars"></i></a>
       </li>
       <li class="nav-item d-none d-sm-inline-block">
-        <a href="index3.html" class="nav-link">Home</a>
+        <a href="/" class="nav-link">Home</a>
       </li>
-      <li class="nav-item d-none d-sm-inline-block">
+      {{-- <li class="nav-item d-none d-sm-inline-block">
         <a href="#" class="nav-link">Contact</a>
-      </li>
+      </li> --}}
+      {{-- <form action="/logout" method="post" name="logoutLink">
+        @csrf --}}
+        <li class="nav-item d-none d-sm-inline-block">
+            {{-- <a href="/logout" onclick="document.logoutLink.submit(s)" class="nav-link">Logout</a> --}}
+            <a href="/logout" class="nav-link">Logout</a>
+
+        </li>
+        {{-- </form> --}}
     </ul>
 
     <!-- Right navbar links -->
