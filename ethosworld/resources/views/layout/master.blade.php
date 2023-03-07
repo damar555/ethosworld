@@ -14,7 +14,9 @@
     @include('layout.sidebar')
 
     <!-- Content Wrapper. Contains page content -->
-    @yield('content')
+    <div class="content-wrapper">
+      @yield('content')
+    </div>
     <!-- /.content-wrapper -->
 
     @include('layout.footer')
