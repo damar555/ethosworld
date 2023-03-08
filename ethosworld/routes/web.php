@@ -4,6 +4,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\NewController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\AuthenticationController;
+use App\Http\Controllers\EthosWorldController;
 
 /*
 |--------------------------------------------------------------------------
@@ -15,6 +16,9 @@ use App\Http\Controllers\AuthenticationController;
 | be assigned to the "web" middleware group. Make something great!
 |
 */
+
+// Company Profile
+Route::get('/ethosworld', [EthosWorldController::class, 'index'])->name('ethosworld');
 
 // Authentication
 Route::get('/login', [AuthenticationController::class, 'loginForm'])->name('login');
@@ -36,11 +40,11 @@ Route::middleware('auth')->group(function () {
     // News
     Route::get('/news',[NewController::class, 'index'])->name('news');
 
-    Route::get('/news/create',[NewController::class, 'create']);
+    // Route::get('/news/create',[NewController::class, 'create']);
     Route::post('/news',[NewController::class, 'store']);
 
+    // Route::get('/news/{id}/edit', [NewController::class, 'edit']);
     Route::put('/news/{id}', [NewController::class, 'update']);
-    Route::get('/news/{id}/edit', [NewController::class, 'edit']);
 
     Route::delete('/news/{id}', [NewController::class, 'destroy']);
 
