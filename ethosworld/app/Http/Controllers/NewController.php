@@ -29,14 +29,14 @@ class NewController extends Controller
      */
     public function store(Request $request)
     {
-        // dd($request->all());
         $data = News::create($request->all());
-        // if($request->hasFile('image')){
-        //     $request->file('image')->move('foto/', $request->file('image')->getClientOriginalName());
-        //     $data->foto = $request->file('image')->getClientOriginalName();
-        //     $data->save();
-        // }
-        return redirect()->route('news')->with('Succes', 'Data Berhasil Ditambahkan');
+        if($request->hasFile('image')){
+            $originalNameImg = $request->file('image')->getClientOriginalName();
+            $request->file('image')->move('images/news/', $originalNameImg);
+            $data->image = $originalNameImg;
+            $data->save();
+        }
+        return redirect()->route('news')->with('Success', 'Data has been created');
     }
 
     /**
