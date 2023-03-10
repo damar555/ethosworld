@@ -4,6 +4,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\NewController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\AuthenticationController;
+use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\EthosWorldController;
 
 /*
@@ -58,6 +59,11 @@ Route::middleware('auth')->group(function () {
     Route::get('/user/{id}/edit', [UserController::class, 'edit']);
 
     Route::delete('/user/{id}', [UserController::class, 'destroy']);
+
+    // Category
+    Route::get('/category', [CategoryController::class, 'index']);
+    Route::get('/category/create', [CategoryController::class, 'create']);
+    Route::post('/category', [CategoryController::class, 'store']);
 });
 
 
