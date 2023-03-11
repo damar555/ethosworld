@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Category;
 use Illuminate\Http\Request;
 use App\Models\News;
 
@@ -12,17 +13,22 @@ class NewController extends Controller
      */
     public function index()
     {
-        $data = News::all();
-        return view('news/index', compact('data'));
+        $news = News::all();
+        $categories = Category::all();
+        $data = array(
+            'news' => $news,
+            'categories' => $categories
+        );
+        return view('news/index', $data );
     }
 
     /**
      * Show the form for creating a new resource.
      */
-    public function create()
-    {
-        return view('news/create');
-    }
+    // public function create()
+    // {
+    //     return view('news/create');
+    // }
 
     /**
      * Store a newly created resource in storage.
@@ -36,7 +42,12 @@ class NewController extends Controller
             $data->image = $originalNameImg;
             $data->save();
         }
-        return redirect()->route('news')->with('Success', 'Data has been created');
+
+        return response()->json([
+            'success' => true,
+            'message' => 'News created successfully!'
+        ]);
+        // return redirect()->route('news')->with('Success', 'Data has been created');
     }
 
     /**
@@ -52,8 +63,8 @@ class NewController extends Controller
      */
     public function edit(string $id)
     {
-        $data = News::find($id);
-        return view('news/edit', compact('data'));
+        $data = News::findOrFail($id, ['id','title','category_id','image','description']);
+        return response()->json($data);
     }
 
     /**
@@ -61,10 +72,20 @@ class NewController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        $data = News::find($id);
-        $data->update($request->all());
+        $data = News::findOrFail($id);
+        $data->title = $request->title;
+        $data->category_id = $request->category_id;
+        $data->description = $request->description;
+        
+        // if($request->hasFile('image')){
+        //     $originalNameImg = $request->file('image')->getClientOriginalName();
+        //     $request->file('image')->move('images/news/', $originalNameImg);
+        //     $data->image = $originalNameImg;
+        // }
 
-        return redirect()->route('news')->with('success', "Data has been modified");
+        $data->save();
+
+        return response()->json(['success'=>true]);    
     }
 
     /**
