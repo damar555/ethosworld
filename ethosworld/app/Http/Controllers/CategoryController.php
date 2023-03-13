@@ -12,7 +12,8 @@ class CategoryController extends Controller
      */
     public function index()
     {
-        return view('category/index');
+        $data = Category::all();
+        return view('category/index', compact('data'));
     }
 
     /**
@@ -43,7 +44,14 @@ class CategoryController extends Controller
         // mapping request
         // $data['_token'] = csrf_token();
         // $data['title'] = $request->title;
-        Category::create($request->all());
+        // dd($request->title);
+       if($request){
+         Category::create($request->all());
+        echo json_encode(['code' => 200, 'status' => 'success', 'message' => 'Success Add']);
+       }else{
+        echo json_encode(['code' => 400, 'status' => 'error', 'message' => 'Error Add']);
+       }
+    
     }
 
     /**
@@ -60,7 +68,7 @@ class CategoryController extends Controller
     public function edit(string $id)
     {
         $data = Category::find($id);
-        return view('kategori/edit', compact('data'));
+        return view('category/edit', compact('data'));
     }
 
     /**
@@ -71,7 +79,7 @@ class CategoryController extends Controller
         $data = Category::find($id);
         $data->update($request->all());
 
-        return redirect()->route('kategori')->with('success', "Data has been modified");
+        return redirect()->route('category')->with('success', "Data has been modified");
     }
 
     /**
@@ -81,6 +89,6 @@ class CategoryController extends Controller
     {
         $data = Category::find($id);
         $data->delete();
-        return redirect()->route('kategori')->with('success', "Data has been deleted");
+        return redirect()->route('category')->with('success', "Data has been deleted");
     }
 }

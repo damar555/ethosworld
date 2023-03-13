@@ -6,7 +6,7 @@ use App\Http\Controllers\UserController;
 use App\Http\Controllers\AuthenticationController;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\EthosWorldController;
-// use App\Http\Controllers\TestController;
+use App\Http\Controllers\MemoController;
 
 
 /*
@@ -32,7 +32,6 @@ Route::post('/register', [AuthenticationController::class, 'register']);
 
 Route::middleware('auth')->group(function () {
     // Logout
-    // Route::post('/logout', [AuthenticationController::class, 'logout'])->name('logout');
     Route::get('/logout', [AuthenticationController::class, 'logout'])->name('logout');
 
     // Dashboard
@@ -54,16 +53,18 @@ Route::middleware('auth')->group(function () {
     Route::delete('/user/{id}', [UserController::class, 'destroy']);
 
     // Category
-    Route::get('/category', [CategoryController::class, 'index']);
+    Route::get('/category', [CategoryController::class, 'index'])->name('category');
     Route::get('/category/create', [CategoryController::class, 'create']);
     Route::post('/category', [CategoryController::class, 'store']);
     Route::delete('/category/{id}', [CategoryController::class, 'destroy']);
 
-    // // Test
-    // Route::get('/test',[TestController::class, 'index'])->name('test');
-    // Route::post('/test',[TestController::class, 'store']);
-    // Route::put('/test/{id}', [TestController::class, 'update']);
-    // Route::delete('/test/{id}', [TestController::class, 'destroy']);
+    // Memo
+    Route::get('/memo', [MemoController::class, 'index'])->name('memo');
+    Route::get('/memo/create', [MemoController::class, 'create']);
+    Route::post('/memo', [MemoController::class, 'store']);
+    Route::get('/memo/update', [MemoController::class, 'update']);
+    Route::get('/memo/{id}', [MemoController::class, 'edit']);
+    Route::get('/destroy/{id}', [MemoController::class, 'destroy']);
 });
 
 

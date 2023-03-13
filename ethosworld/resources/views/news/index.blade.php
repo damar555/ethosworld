@@ -32,7 +32,7 @@
                         <td>{{ $row->description }}</td>
                         <td>
                             <button type="button" class="btn btn-warning"
-                                onclick="editData({{ $row->id }})">Edit</button>
+                                onclick="showNews({{ $row->id }})">Edit</button>
 
                             <form action="/news/{{ $row->id }}" method="post" class="d-inline">
                                 @method('delete')
@@ -86,7 +86,7 @@
                 </div>
                 <div class="modal-footer justify-content-between">
                     <button type="button" class="btn btn-default" data-dismiss="modal">Batal</button>
-                    <button type="button" class="btn btn-primary" onclick="store()">Simpan</button>
+                    <button type="button" class="btn btn-primary" id="btnTambah" onclick="storeNews()">Save changes</button>
                 </div>
             </div>
         </div>
@@ -104,7 +104,7 @@
                 </div>
                 <div class="modal-body">
                     <form id="edit-news-form">
-                        <input type="hidden" id="id-edit" name="id-edit" >
+                        <input type="hidden" id="id-edit" name="id-edit" value="{{$row->id}}">
                         <div class="form-group">
                             <label class="form-label">Judul</label>
                             <input type="text" name="title" class="form-control"
@@ -136,7 +136,7 @@
                 </div>
                 <div class="modal-footer justify-content-between">
                     <button type="button" class="btn btn-default" data-dismiss="modal">Batal</button>
-                    <button type="button" class="btn btn-primary" onclick="update()">Simpan</button>
+                    <button type="button" class="btn btn-primary" onclick="updateNews()">Simpan</button>
                 </div>
             </div>
             <!-- /.modal-content -->
@@ -145,8 +145,7 @@
     </div>
 
     <script>
-        // Add news
-        function store() {
+        function storeNews() {
             let title = $('#title').val();
             let category_id = $('#category_id').val();
             let description = $('#description').val();
@@ -184,8 +183,8 @@
             return false;
         }
 
-        // Show data to modal-edit
-        function editData(id) {
+        // Show data modal
+        function showNews(id) { 
             $.ajax({
                 type: "GET",
                 url: "{{ route('news') }}" + "/" + id,
@@ -203,8 +202,8 @@
             });
         }
 
-        // Update news
-        function update() {
+        //
+        function updateNews() {
             let idEdit = $('#id-edit').val();
 
             let titleEdit = $('#title-edit').val();
@@ -222,29 +221,24 @@
             dataEdit.append('image', fileEdit);
             dataEdit.append('_method', 'PUT');
 
-            // console.log(dataEdit.get('title'));
-
-            // var regex = /^([a-zA-Z0-9\s_\\.\-:])+(.jpg|.png|.jpeg)$/;
-            // if (regex.test(imageEdit.value.toLowerCase())) {
-                $.ajax({
-                    headers: {
-                        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-                    },
-                    type: 'POST',
-                    url: "{{ route('news') }}" + "/" + idEdit,
-                    data: dataEdit,
-                    contentType: false,
-                        : false,
-                    success: function(response) {
-                        swal.fire("Sukses!", response.message, response.status);
-                        $('#edit-news-form')[0].reset();
-                        $('#modalEdit').modal('hide');
-                    },
-                    error: function(response) {
-                        console.log(response);  
-                    }
-                });
-            // }
+            $.ajax({
+                headers: {
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                },
+                type: 'POST',
+                url: "{{ route('news') }}" + "/" + idEdit,
+                data: dataEdit,
+                contentType: false,
+                processData : false,
+                success: function(response) {
+                    swal.fire("Sukses!", response.message, response.status);
+                    $('#edit-news-form')[0].reset();
+                    $('#modalEdit').modal('hide');
+                },
+                error: function(response) {
+                    console.log(response);  
+                }
+            });
         }
     </script>
 @endsection
