@@ -6,6 +6,8 @@ use App\Http\Controllers\UserController;
 use App\Http\Controllers\AuthenticationController;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\EthosWorldController;
+// use App\Http\Controllers\TestController;
+
 
 /*
 |--------------------------------------------------------------------------
@@ -40,30 +42,28 @@ Route::middleware('auth')->group(function () {
 
     // News
     Route::get('/news',[NewController::class, 'index'])->name('news');
-
-    // Route::get('/news/create',[NewController::class, 'create']);
     Route::post('/news',[NewController::class, 'store']);
-
-    // Route::get('/news/{id}/edit', [NewController::class, 'edit']);
     Route::put('/news/{id}', [NewController::class, 'update']);
-
+    Route::get('/news/{id}', [NewController::class, 'edit']);
     Route::delete('/news/{id}', [NewController::class, 'destroy']);
 
     // User
     Route::get('/user', [UserController::class, 'index'])->name('user');
-
-    // Route::get('/user/create',[UserController::class, 'create']);
     Route::post('/user',[UserController::class, 'store']);
-
-    // Route::put('/user/{id}', [UserController::class, 'update']);
     Route::get('/user/{id}/edit', [UserController::class, 'edit']);
-
     Route::delete('/user/{id}', [UserController::class, 'destroy']);
 
     // Category
     Route::get('/category', [CategoryController::class, 'index']);
     Route::get('/category/create', [CategoryController::class, 'create']);
     Route::post('/category', [CategoryController::class, 'store']);
+    Route::delete('/category/{id}', [CategoryController::class, 'destroy']);
+
+    // // Test
+    // Route::get('/test',[TestController::class, 'index'])->name('test');
+    // Route::post('/test',[TestController::class, 'store']);
+    // Route::put('/test/{id}', [TestController::class, 'update']);
+    // Route::delete('/test/{id}', [TestController::class, 'destroy']);
 });
 
 
