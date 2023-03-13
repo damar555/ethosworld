@@ -142,7 +142,7 @@
     </div> 
     @endforeach
 
-    <script>
+    {{-- <script>
         $(document).on('click','.open_modal',function(){
             var url = "domain.com/yoururl";
             var tour_id= $(this).val();
@@ -156,6 +156,6 @@
                 $('#myModal').modal('show');
             }) 
         });
-    </script>
+    </script> --}}
 @endsection
     
